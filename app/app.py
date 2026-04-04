@@ -38,7 +38,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 7,
    "id": "568b2599-c5dc-4b05-a2b7-7643506a3eeb",
    "metadata": {},
    "outputs": [
@@ -46,20 +46,7 @@
      "name": "stderr",
      "output_type": "stream",
      "text": [
-      "2026-04-04 11:41:30.912 WARNING streamlit.runtime.caching.cache_data_api: No runtime found, using MemoryCacheStorageManager\n",
-      "2026-04-04 11:41:30.914 WARNING streamlit.runtime.caching.cache_data_api: No runtime found, using MemoryCacheStorageManager\n",
-      "2026-04-04 11:41:30.914 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-04-04 11:41:31.435 \n",
-      "  \u001b[33m\u001b[1mWarning:\u001b[0m to view this Streamlit app on a browser, run it with the following\n",
-      "  command:\n",
-      "\n",
-      "    streamlit run C:\\Users\\Admin\\anaconda3\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]\n",
-      "2026-04-04 11:41:31.436 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-04-04 11:41:31.437 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-04-04 11:41:32.009 Thread 'Thread-3': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-04-04 11:41:32.025 Thread 'Thread-3': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-04-04 11:41:32.026 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-04-04 11:41:32.026 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n"
+      "2026-04-04 11:48:16.521 No runtime found, using MemoryCacheStorageManager\n"
      ]
     }
    ],
@@ -67,10 +54,24 @@
     "#Load data and models\n",
     "@st.cache_data   # caches so it doesn't reload on every interaction\n",
     "def load_data():\n",
-    "    return pd.read_csv('../data/processed/tracks_with_moods.csv')\n",
+    "    return pd.read_csv(r\"C:\\Users\\Admin\\Desktop\\My stuff\\Programming\\ML\\Projects\\spotify-recommendation-system\\data\\processed\\tracks_with_moods.csv\")\n",
     "df = load_data()\n",
     "FEATURE_COLS = ['danceability', 'energy', 'valence', 'acousticness',\n",
     "                'tempo', 'loudness', 'speechiness', 'instrumentalness']\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "bd7ccff4-bfaa-4a36-bdc4-bfa947fa7b88",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# ── Precompute similarity matrix ─────────────────────\n",
+    "scaler = StandardScaler()\n",
+    "X = scaler.fit_transform(df[FEATURE_COLS])\n",
+    "\n",
+    "similarity_matrix = cosine_similarity(X)"
    ]
   },
   {
