@@ -1,6 +1,6 @@
 .ipynb_checkpoints/
+*.csv
 data/*
 !data/processed/
 data/processed/*
 !data/processed/tracks_with_moods.csv
-*.csv
